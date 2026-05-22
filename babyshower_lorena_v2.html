@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="🐚 Baby Shower · Lorena Ospina 🌊">
+<meta property="og:description" content="Te invitamos al Baby Shower de nuestra hija 💕 Sábado 13 de junio, 3:30pm">
+<title>Baby Shower · Lorena Ospina</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Quicksand',sans-serif;
+  background:#C8E8F4;
+  min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* ═══ BACKGROUND MARINO GLOBAL ═══ */
+.bg{
+  position:fixed;inset:0;z-index:0;
+  background:linear-gradient(180deg,
+    #D8EEF8 0%, #C4E2F2 18%,
+    #B0D4EC 38%, #A8CCDF 55%,
+    #B8D8CC 72%, #C8D8A8 88%,
+    #D4C890 100%
+  );
+}
+.bg-sand{
+  position:fixed;bottom:0;left:0;right:0;height:130px;z-index:1;
+  background:linear-gradient(180deg,transparent 0%,#E4D4A4 35%,#CDB87A 100%);
+  border-radius:55% 55% 0 0/28px 28px 0 0;
+}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+@keyframes floatYL{0%,100%{transform:translateY(0) scaleX(-1)}50%{transform:translateY(-9px) scaleX(-1)}}
+@keyframes sway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+@keyframes swayR{0%,100%{transform:rotate(7deg) scaleX(-1)}50%{transform:rotate(-7deg) scaleX(-1)}}
+@keyframes swim{0%,100%{transform:translate(0,0)}30%{transform:translate(5px,-4px)}70%{transform:translate(-4px,-7px)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes bubbleRise{0%{transform:translateX(0) translateY(0);opacity:0}8%{opacity:.65}90%{opacity:.25}100%{transform:translateX(var(--bx)) translateY(-108vh);opacity:0}}
+@keyframes heartFloat{0%{transform:translateY(0) scale(1);opacity:1}100%{transform:translateY(-44px) scale(.4);opacity:0}}
+@keyframes shimmer{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes waveArm{0%,100%{transform:rotate(-5deg) translateY(0)}50%{transform:rotate(8deg) translateY(-4px)}}
+
+/* Animaciones para los botones llamativos */
+@keyframes pulseBtn {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+@keyframes shineEffect {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ═══ GLOBAL BUBBLES ═══ */
+.bubble{
+  position:fixed;border-radius:50%;z-index:2;pointer-events:none;
+  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.9),rgba(255,255,255,.06));
+  border:1.5px solid rgba(255,255,255,.7);
+  animation:bubbleRise linear infinite;opacity:0;
+}
+
+.seaweed-w{position:fixed;bottom:0;z-index:3;pointer-events:none}
+
+/* ═══ PAGE ═══ */
+.page{position:relative;z-index:10;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px 14px 90px}
+
+/* ═══ CARD ═══ */
+.card{
+  background:linear-gradient(180deg,
+    #C8E8F5 0%, #A8D4EE 12%, #8EC4E8 28%, #7AB8E0 42%, #6CAED8 55%,
+    #7ABCC8 66%, #8ACAAA 76%, #A0C87E 86%, #B8B864 93%, #C8A84A 100%
+  );
+  border-radius:30px;
+  max-width:410px;width:100%;
+  padding:0 0 0px;
+  position:relative;
+  box-shadow:
+    0 0 0 3px rgba(249,168,200,.5),
+    0 0 0 7px rgba(255,255,255,.6),
+    0 28px 70px rgba(60,40,80,.22);
+  overflow:visible;
+  animation:cardEntry .8s ease-out forwards;
+}
+.card::before{
+  content:'';position:absolute;inset:-5px;border-radius:35px;
+  border:2px dashed rgba(255,255,255,.5);pointer-events:none;z-index:0;
+}
+
+/* Contenedor recortador exclusivo para la arena inferior */
+.card-sand-clipper {
+  position: absolute;
+  inset: 0;
+  border-radius: 30px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Capa de arena dentro del recortador */
+.card-sand {
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:75px;
+  background:linear-gradient(180deg, rgba(234,212,162,0.4) 0%, #EAD4A2 25%, #D4BC82 100%);
+  border-radius:60% 60% 0 0 / 18px 18px 0 0;
+}
+
+.card-bubble{
+  position:absolute;border-radius:50%;pointer-events:none;z-index:1;
+  background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.85),rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.6);
+  animation:bubbleRise linear infinite;opacity:0;
+}
+
+.card-seaweed{position:absolute;bottom:15px;pointer-events:none;z-index:4}
+
+/* ── HEADER ── */
+.card-header{
+  background:linear-gradient(180deg,rgba(255,255,255,.28) 0%,rgba(255,255,255,.10) 100%);
+  border-radius:27px 27px 0 0;
+  padding:28px 22px 20px;text-align:center;
+  border-bottom:2px dashed rgba(255,255,255,.4);
+  position:relative;overflow:hidden;z-index:2;
+}
+.title-te{
+  font-size:15px;font-weight:600;color:#fff;
+  text-shadow:0 1px 6px rgba(60,100,140,.6),0 0 18px rgba(100,180,220,.5);
+  margin-bottom:2px;letter-spacing:.04em;
+}
+.title-bs{
+  font-family:'Pacifico',cursive;font-size:48px;color:#FFE0EC;line-height:1.05;
+  text-shadow: 2px 3px 0 rgba(200,80,120,.35), 0 0 20px rgba(255,180,210,.6), 0 2px 12px rgba(180,60,100,.3);
+  display:block;animation:pulse 3.2s ease-in-out infinite;
+}
+.title-de{
+  font-size:19px;font-weight:700;color:#fff;
+  text-shadow:0 1px 8px rgba(50,100,160,.5),0 0 14px rgba(120,200,240,.4);
+  letter-spacing:.04em;
+}
+.parents-tag{
+ display:inline-block;background:rgba(249,168,200,.15);border:1px solid rgba(249,168,200,.35);border-radius:50px;padding:5px 16px;font-size:12px;font-weight:600;color:#E8729A;margin-top:10px;
+}
+
+/* ── BODY ── */
+.card-body{padding:0 20px 0px;position:relative;z-index:2}
+.info-list{margin:18px 0;display:flex;flex-direction:column;gap:0}
+.info-row{
+  display:flex;align-items:flex-start;gap:12px;padding:11px 14px;
+  border-bottom:1px dashed rgba(255,255,255,.35);
+  background:rgba(255,255,255,.15);backdrop-filter:blur(6px);
+  border-radius:12px;margin-bottom:6px;
+}
+.info-row:last-child{border-bottom:none;margin-bottom:0}
+.info-bubble{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;animation:swim 4.5s ease-in-out infinite}
+.ib1{background:rgba(255,220,230,.35);animation-delay:0s;box-shadow:0 0 0 2px rgba(255,180,210,.3)}
+.ib2{background:rgba(180,230,255,.35);animation-delay:.9s;box-shadow:0 0 0 2px rgba(150,210,240,.3)}
+.ib3{background:rgba(160,240,200,.35);animation-delay:1.8s;box-shadow:0 0 0 2px rgba(120,210,170,.3)}
+.info-label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#FFD0E8;text-shadow:0 1px 4px rgba(180,60,100,.4);display:block;margin-bottom:2px;}
+.info-value{font-size:15px;font-weight:700;color:#fff;text-shadow:0 1px 6px rgba(40,80,130,.4),0 0 10px rgba(100,180,220,.25);line-height:1.35;}
+.info-value.sm{font-size:13.5px;font-weight:600}
+
+.poem-wrap{
+  background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.38);
+  backdrop-filter:blur(8px);border-radius:20px;padding:16px 17px;text-align:center;
+  margin-bottom:15px;position:relative;
+}
+.poem-wrap::before{content:'💕';position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:18px;background:rgba(140,190,220,.6);padding:0 8px;border-radius:20px}
+.poem-text{font-size:13.5px;font-weight:500;color:#fff;text-shadow:0 1px 5px rgba(40,80,130,.35);line-height:1.75;font-style:italic;padding-top:5px;}
+.poem-text em{color:#FFD8EC;font-style:normal;font-weight:700;text-shadow:0 0 8px rgba(255,160,200,.5)}
+
+.cd-wrap{margin-bottom:16px;text-align:center}
+.cd-title{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#bfebff;text-shadow:0 1px 4px rgba(40,120,180,.4);margin-bottom:9px;display:block;}
+.cd-boxes{display:flex;justify-content:center;gap:7px}
+.cd-box{background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.4);backdrop-filter:blur(8px);border-radius:13px;padding:9px 5px 6px;min-width:60px;text-align:center;}
+.cd-num{font-family:'Pacifico',cursive;font-size:26px;color:#fff;display:block;line-height:1;text-shadow:0 2px 8px rgba(40,100,180,.3)}
+.cd-unit{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#D0F0FF;display:block;margin-top:2px}
+.cd-done{font-family:'Pacifico',cursive;font-size:17px;color:#FFE0EC;padding:10px 0;text-shadow:0 0 12px rgba(255,160,200,.5)}
+
+/* ── BOTONES OPTIMIZADOS (SOMBREADO, MOVIMIENTO Y DESTELLO) ── */
+.btn-group{display:flex;flex-direction:column;gap:11px;margin-bottom:8px}
+.btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  padding:14px 18px;
+  border-radius:50px;
+  font-family:'Quicksand',sans-serif;
+  font-size:14px;
+  font-weight:700;
+  text-decoration:none;
+  border:none;
+  cursor:pointer;
+  letter-spacing:.02em;
+  position:relative;
+  overflow:hidden;
+  z-index:4;
+  animation: pulseBtn 2.8s ease-in-out infinite;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efecto Destello de Luz (Shimmer) pasando infinitamente */
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-25deg);
+  animation: shineEffect 3.5s infinite ease-in-out;
+}
+
+.btn-wa::after { animation-delay: 0s; }
+.btn-maps::after { animation-delay: 1.2s; }
+.btn-gifts::after { animation-delay: 2.4s; }
+
+.btn:hover {
+  animation-play-state: paused;
+  transform: translateY(-4px) scale(1.02);
+}
+.btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.btn-wa{
+  background:linear-gradient(135deg,#2DD36F,#25D366);
+  color:#fff;
+  box-shadow: 0 5px 0 #1b9a49, 0 8px 20px rgba(37,211,102,0.45);
+}
+.btn-wa:hover {
+  box-shadow: 0 7px 0 #1b9a49, 0 12px 25px rgba(37,211,102,0.65);
+}
+
+.btn-maps{
+  background:linear-gradient(135deg,#4BAAC8,#89D4E8);
+  color:#fff;
+  box-shadow: 0 5px 0 #327e96, 0 8px 20px rgba(75,170,200,0.45);
+}
+.btn-maps:hover {
+  box-shadow: 0 7px 0 #327e96, 0 12px 25px rgba(75,170,200,0.65);
+}
+
+.btn-gifts{
+  background:linear-gradient(135deg,#E8729A,#F9A8C9);
+  color:#fff;
+  box-shadow: 0 5px 0 #b34a6f, 0 8px 20px rgba(232,114,154,0.45);
+}
+.btn-gifts:hover {
+  box-shadow: 0 7px 0 #b34a6f, 0 12px 25px rgba(232,114,154,0.65);
+}
+
+.btn-icon{width:19px;height:19px;flex-shrink:0}
+
+/* Ajustes del footer sobre la arena */
+.card-footer{text-align:center;position:relative;z-index:4;padding:25px 0 25px;border-top:2px dashed rgba(255,255,255,.35);}
+.card-footer p{font-family:'Pacifico',cursive;font-size:15px;color:#fff;text-shadow:0 2px 6px rgba(140,100,40,.8);}
+
+.heart-float{position:absolute;pointer-events:none;animation:heartFloat 3s ease-out infinite;opacity:0}
+
+/* ── ESTILOS Y ANIMACIONES DE LAS CRIATURAS SVG ── */
+.card-animal{position:absolute;pointer-events:none;z-index:5}
+
+.anim-medusa{top:-22px;left:-25px;width:105px;animation:floatY 4.2s ease-in-out infinite}
+.anim-tortuga{top:-20px;right:-25px;width:115px;animation:floatY 5s ease-in-out infinite}
+.anim-ballena{bottom:15px;left:-28px;width:140px;animation:floatY 5.5s ease-in-out infinite}
+.anim-caballito{bottom:12px;right:-12px;width:72px;animation:sway 4.5s ease-in-out infinite;transform-origin:bottom center}
+.anim-pez-rosa{top:36%;left:-20px;width:75px;animation:floatYL 5s ease-in-out infinite}
+.anim-pez-amarillo{top:39%;right:-20px;width:75px;animation:floatY 5.5s ease-in-out infinite}
+.anim-estrella{top:-25px;left:50%;transform:translateX(-50%);width:58px;animation:shimmer 4s ease-in-out infinite}
+
+/* ── ESTILOS PARA LOS ANIMALITOS FIJOS EN LA ARENA ── */
+.card-animal-arena{position:absolute;pointer-events:none;z-index:3;opacity:0.65}
+
+.animal-arena-ostra{bottom:3px;left:7%;width:60px;height:50px}
+.animal-arena-concha{bottom:8px;right:22%;width:45px;height:40px}
+.animal-arena-estrella-rosa{bottom:1px;right:4%;width:65px;height:60px}
+.animal-arena-estrella-naranja{bottom:15px;left:34%;width:55px;height:50px}
+
+/* NUEVA IMAGEN: Imagen de la costra/concha añadida en la arena */
+.animal-arena-costra {
+  position: absolute;
+  bottom: 5px;
+  left: 54%;
+  width: 55px;
+  height: auto;
+  pointer-events: none;
+  z-index: 3;
+  animation: floatY 6s ease-in-out infinite; /* Sutil movimiento marino */
+}
+
+@media(max-width:380px){.title-bs{font-size:41px}.cd-box{min-width:51px}.cd-num{font-size:22px}}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="bg-sand"></div>
+
+<div class="seaweed-w" style="left:12%;animation:sway 5.2s ease-in-out infinite">
+<svg width="34" height="108" viewBox="0 0 34 108" fill="none">
+  <defs><linearGradient id="sw1" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#8DD9C0"/><stop offset="100%" stop-color="#B8ECD8"/></linearGradient></defs>
+  <path d="M17 108 C12 88 22 70 14 52 C6 34 20 18 17 0" stroke="url(#sw1)" stroke-width="4" stroke-linecap="round" fill="none"/>
+</svg>
+</div>
+
+<div class="page">
+  <div class="card" id="mainCard">
+
+    <div class="card-animal anim-medusa">
+      <img src="Images/medusa.png" alt="Medusa" width="100%" height="100%">
+    </div>
+
+    <div class="card-animal anim-tortuga">
+      <img src="Images/tortuga.png" alt="Tortuga" width="100%" height="100%">
+    </div>
+
+    <div class="card-animal anim-estrella">
+      <img src="Images/estrella_mar.png" alt="Estrella de mar" width="100%" height="100%">
+    </div>
+
+    <div class="card-animal anim-pez-rosa">
+      <img src="Images/pez_rosa.png" alt="Pez Rosa" width="100%" height="100%">
+    </div>
+
+    <div class="card-animal anim-pez-amarillo">
+      <img src="Images/pez_dorado.png" alt="Pez Amarillo" width="100%" height="100%">
+    </div>
+
+    <div class="card-animal anim-ballena">
+      <img src="Images/ballena.png" alt="Ballena" width="100%" height="100%">
+    </div>
+
+    <div class="card-animal anim-caballito">
+      <img src="Images/caballito.png" alt="Caballito de mar" width="100%" height="100%">
+    </div>
+
+    <div id="cardBubbles"></div>
+
+    <div class="card-seaweed" style="left:12px;animation:sway 5s ease-in-out infinite;height:50px;width:22px;">
+    <svg width="22" height="50" viewBox="0 0 22 50" fill="none">
+      <path d="M11 50 C8 42 14 32 9 22 C4 12 11 8 11 0" stroke="#8DD9C0" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".7"/>
+    </svg>
+    </div>
+    <div class="card-seaweed" style="right:12px;animation:swayR 5.6s ease-in-out infinite;animation-delay:.8s;height:45px;width:20px;">
+    <svg width="20" height="45" viewBox="0 0 20 45" fill="none">
+      <path d="M10 45 C7 37 13 28 8 20 C3 11 10 6 10 0" stroke="#F0A8A0" stroke-width="3" stroke-linecap="round" fill="none" opacity=".6"/>
+    </svg>
+    </div>
+
+    <div class="card-sand-clipper">
+      <div class="card-sand"></div>
+      
+      <div class="card-animal-arena animal-arena-ostra">
+        <svg viewBox="0 0 52 44" width="100%" height="100%"><defs><radialGradient id="sh2" cx="40%" cy="30%" r="60%"><stop offset="0%" stop-color="#F0E8D8"/><stop offset="100%" stop-color="#C8B898"/></radialGradient></defs><path d="M26 0 C14 8 4 22 6 36 C8 44 44 44 46 36 C48 22 38 8 26 0Z" fill="url(#sh2)" stroke="#B09878" stroke-width=".8"/><path d="M26 0 C22 10 18 20 20 34 M26 0 C30 10 34 20 32 34 M26 0 C26 12 26 22 26 36" stroke="#A08060" stroke-width=".8" opacity=".4"/><circle cx="26" cy="30" r="7" fill="rgba(255,255,255,.85)" stroke="rgba(200,190,210,.6)" stroke-width=".8"/><ellipse cx="23.5" cy="27.5" rx="3" ry="2" fill="rgba(255,255,255,.6)"/></svg>
+      </div>
+      
+      <div class="card-animal-arena animal-arena-concha">
+        <svg viewBox="0 0 34 28" width="100%" height="100%"><defs><radialGradient id="sn1" cx="45%" cy="40%" r="55%"><stop offset="0%" stop-color="#E8D0F0"/><stop offset="100%" stop-color="#C0A0D8"/></radialGradient></defs><path d="M17 4 C8 4 2 10 2 17 C2 24 8 27 17 27 C26 27 32 22 32 17 C32 10 26 6 20 8 C16 9 13 13 14 17 C15 21 19 22 21 19 C23 17 21 14 18 15" stroke="url(#sn1)" stroke-width="5" stroke-linecap="round" fill="none"/><circle cx="14" cy="17" r="3.5" fill="#C0A0D8" opacity=".6"/></svg>
+      </div>
+      
+      <div class="card-animal-arena animal-arena-estrella-rosa">
+        <svg viewBox="0 0 60 60" width="100%" height="100%"><defs><radialGradient id="sfgrad" cx="45%" cy="35%" r="60%"><stop offset="0%" stop-color="#FFD8A8"/><stop offset="100%" stop-color="#F0A050"/></radialGradient></defs><path d="M30 4 L34 22 L52 18 L38 30 L48 46 L30 36 L12 46 L22 30 L8 18 L26 22 Z" fill="url(#sfgrad)" stroke="#E08030" stroke-width=".8"/><ellipse cx="23" cy="22" rx="5" ry="3" fill="rgba(255,255,255,.4)" transform="rotate(-30 23 22)"/></svg>
+      </div>
+
+       <div class="card-animal-arena animal-arena-estrella-naranja">
+        <svg viewBox="0 0 60 60" width="100%" height="100%"><path d="M30 4 L34 22 L52 18 L38 30 L48 46 L30 36 L12 46 L22 30 L8 18 L26 22 Z" fill="#F0A050" stroke="#E08030" stroke-width=".8"/><ellipse cx="23" cy="22" rx="5" ry="3" fill="rgba(255,255,255,.4)" transform="rotate(-30 23 22)"/></svg>
+      </div>
+
+      <img src="Images/costra.png" alt="Costra marina" class="animal-arena-costra">
+    </div>
+
+    <div class="card-header">
+      <p class="title-te">Te invitamos al</p>
+      <span class="title-bs">Baby Shower</span>
+      <p class="title-de">de nuestra hija 🐚</p>
+      <div class="parents-tag">Lorena Ospina & Jean Paul Henao</div>
+    </div>
+
+    <div class="card-body">
+      <div class="info-list">
+        <div class="info-row">
+          <div class="info-bubble ib1">🗓</div>
+          <div>
+            <span class="info-label">Fecha</span>
+            <span class="info-value">Domingo 14 de junio de 2026</span>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-bubble ib2">⏰</div>
+          <div>
+            <span class="info-label">Hora</span>
+            <span class="info-value">3:30 p.m.</span>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-bubble ib3">📍</div>
+          <div>
+            <span class="info-label">Dirección</span>
+            <span class="info-value sm">Calle 71, Jordán 3ª Etapa<br>Edificio SAM, sobre la paralela<br>Ibagué, Tolima</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="poem-wrap">
+        <p class="poem-text">Bajo las olas del mar más bonito<br>
+        llegará pronto nuestro <em>gran regalito</em>.<br>
+        Con aletas, burbujas y mucho color,<br>
+        la esperamos con todo <em>nuestro amor</em> 🐠</p>
+      </div>
+
+      <div class="cd-wrap">
+        <span class="cd-title">🫧 faltan 🫧</span>
+        <div id="countdown-area"></div>
+      </div>
+
+      <div class="btn-group">
+        <a href="https://wa.me/573001234567?text=%C2%A1Confirmo%20mi%20asistencia%20al%20Baby%20Shower%20de%20Lorena!%20%F0%9F%90%A0%F0%9F%8C%8A" target="_blank" class="btn btn-wa">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Confirmar Asistencia 🐠
+        </a>
+        <a href="http://maps.google.com/?q=Calle+71,+Jordan+3+etapa,+Ibagué" target="_blank" class="btn btn-maps">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Ver ubicación 📍
+        </a>
+        <a href="https://app.mywishlist.co/es/lorenaospinapadilla/lista-de-regalos" target="_blank" class="btn btn-gifts">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+          Lista de regalos 🎀
+        </a>
+      </div>
+
+      <div style="height: 30px;"></div>
+      
+      <div class="card-footer">
+        <p>¡Con amor los esperamos! 💕🌊</p>
+      </div>
+      <div style="height: 90px;"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Countdown ──
+const eventDate=new Date("June 14, 2026 15:30:00").getTime();
+function updateCD(){
+  const diff=eventDate-Date.now();
+  const area=document.getElementById('countdown-area');
+  if(diff<=0){area.innerHTML='<p class="cd-done">🎉 ¡Hoy es el gran día! 🎉</p>';return;}
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor((diff%86400000)/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
+  area.innerHTML=`<div class="cd-boxes">
+    <div class="cd-box"><span class="cd-num">${String(d).padStart(2,'0')}</span><span class="cd-unit">días</span></div>
+    <div class="cd-box"><span class="cd-num">${String(h).padStart(2,'0')}</span><span class="cd-unit">horas</span></div>
+    <div class="cd-box"><span class="cd-num">${String(m).padStart(2,'0')}</span><span class="cd-unit">min</span></div>
+    <div class="cd-box"><span class="cd-num">${String(s).padStart(2,'0')}</span><span class="cd-unit">seg</span></div>
+  </div>`;
+}
+updateCD();setInterval(updateCD,1000);
+
+// ── Burbujas dentro de la card ──
+(function(){
+  const card=document.getElementById('mainCard');
+  const container=document.getElementById('cardBubbles');
+  if(!card||!container)return;
+  for(let i=0;i<18;i++){
+    const b=document.createElement('div');
+    b.className='card-bubble';
+    const sz=Math.random()*12+4;
+    const bx=(Math.random()-.5)*40;
+    const leftPct=Math.random()*90+5;
+    b.style.cssText=`
+      position:absolute;
+      width:${sz}px;height:${sz}px;
+      left:${leftPct}%;bottom:10px;
+      border-radius:50%;z-index:1;pointer-events:none;
+      background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.85),rgba(255,255,255,.05));
+      border:1px solid rgba(255,255,255,.6);
+      animation:bubbleRise linear infinite;opacity:0;
+      animation-duration:${Math.random()*10+7}s;
+      animation-delay:${Math.random()*12}s;
+      --bx:${bx}px;
+    `;
+    container.appendChild(b);
+  }
+})();
+
+// ── Corazones flotantes sobre la tarjeta ──
+function spawnHeart(){
+  const card=document.querySelector('.card');if(!card)return;
+  const h=document.createElement('div');h.className='heart-float';
+  const emojis=['💕','💗','🩷','💞','🫧'];
+  h.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+  h.style.cssText=`position:absolute;font-size:${9+Math.random()*8}px;left:${10+Math.random()*80}%;top:${5+Math.random()*25}%;pointer-events:none;z-index:3;animation:heartFloat ${2+Math.random()*2}s ease-out forwards;`;
+  card.appendChild(h);
+  setTimeout(()=>h.remove(),4200);
+}
+setInterval(spawnHeart,2200);
+
+// ── Generador dinámico de burbujas en el fondo global ──
+(function(){
+  for(let i=0; i<34; i++){
+    const b = document.createElement('div');
+    b.className = 'bubble';
+    const sz = Math.random() * 18 + 5;
+    const bx = (Math.random() - .5) * 55;
+    b.style.cssText = `
+      width: ${sz}px;
+      height: ${sz}px;
+      left: ${Math.random() * 100}vw;
+      bottom: -${sz}px;
+      animation-duration: ${Math.random() * 14 + 8}s;
+      animation-delay: ${Math.random() * 16}s;
+      --bx: ${bx}px;
+    `;
+    document.body.appendChild(b);
+  }
+})();
+</script>
+</body>
+</html>
